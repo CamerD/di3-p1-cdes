@@ -1,0 +1,11 @@
+127.0.0.1	localhost
+127.0.1.1	worker-02.di3.reseau-labo.fr	worker-02
+
+10.4.27.63 master-01.di3.reseau-labo.fr master-01
+10.4.27.64 worker-01.di3.reseau-labo.fr worker-01
+10.4.27.65 worker-02.di3.reseau-labo.fr worker-02
+
+# The following lines are desirable for IPv6 capable hosts
+::1     localhost ip6-localhost ip6-loopback
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters

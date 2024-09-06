@@ -6,4 +6,4 @@
     mode: '0755'
 
 - name: Execute init.sh
-  command: ./root/init.sh
+  command: /root/init.sh

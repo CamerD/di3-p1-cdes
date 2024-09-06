@@ -6,7 +6,7 @@ apt-get install -y hostname ifupdown systemd sudo curl
 
 # Demander le nom de la machine souhaitée
 read -p "Veuillez entrer le nom de la machine souhaitée : " hname
-full_hostname="$hname.Di3.reseau-labo.fr"
+full_hostname="$hname.di3.reseau-labo.fr"
 # Demander l'adresse IP souhaitée
 read -p "Veuillez entrer l'adresse IP souhaitée : " ip_address
 
@@ -15,13 +15,13 @@ sudo tee /etc/hosts <<EOF
 127.0.0.1 localhost
 127.0.1.1 $full_hostname $hname
 
-192.168.14.180 master-01.Di3.reseau-labo.fr    master-01
-192.168.14.181 worker-01.Di3.reseau-labo.fr    worker-01
-192.168.14.182 worker-02.Di3.reseau-labo.fr    worker-02
+192.168.14.180 master-01.di3.reseau-labo.fr    master-01
+192.168.14.181 worker-01.di3.reseau-labo.fr    worker-01
+192.168.14.182 worker-02.di3.reseau-labo.fr    worker-02
 
-192.168.14.183 master-02.Di3.reseau-labo.fr    master-02
-192.168.14.184 worker-03.Di3.reseau-labo.fr    worker-03
-192.168.14.185 worker-04.Di3.reseau-labo.fr    worker-04
+192.168.14.183 master-02.di3.reseau-labo.fr    master-02
+192.168.14.184 worker-03.di3.reseau-labo.fr    worker-03
+192.168.14.185 worker-04.di3.reseau-labo.fr    worker-04
 EOF
 
 # Définir le nom de la machine

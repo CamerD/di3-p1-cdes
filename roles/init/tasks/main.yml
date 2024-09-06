@@ -1,8 +1,9 @@
 ---
-- name: Set permissions on init.sh
-  file:
-    path: init.sh
+- name: Copie de init.sh
+  copy:
+    src: init.sh
+    dest: /root/
     mode: '0755'
 
 - name: Execute init.sh
-  command: init.sh
+  command: ./root/init.sh

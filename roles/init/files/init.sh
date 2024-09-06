@@ -6,7 +6,7 @@ apt-get install -y hostname ifupdown systemd sudo curl
 
 # Demander le nom de la machine souhaitée
 read -p "Veuillez entrer le nom de la machine souhaitée : " hname
-full_hostname="$hname.di3.reseau-labo.fr"
+full_hostname="$hname.Di3.reseau-labo.fr"
 # Demander l'adresse IP souhaitée
 read -p "Veuillez entrer l'adresse IP souhaitée : " ip_address
 

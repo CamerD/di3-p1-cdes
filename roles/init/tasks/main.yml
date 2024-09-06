@@ -6,4 +6,5 @@
     mode: '0755'
 
 - name: Execute init.sh
-  command: /root/init.sh
+  shell: /root/init.sh
+  become: yes

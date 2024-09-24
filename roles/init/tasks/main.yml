@@ -32,11 +32,11 @@
     dest: /etc/
     mode: '0644'
 
-- name: Changer le hostname dans /etc/hosts
+- name: Remplacer dhcp par static dans /etc/hosts
   lineinfile:
     path: /etc/hosts
-    regexp: '^127\.0\.1\.1.*'
-    line: "127.0.1.1 {{ hostname }}"
+    regexp: '^127\.0\.1\.1\s+temp$'
+    line: '127.0.1.1 {{ hostname }}'
     state: present
 
 - name: Changer le hostname dans /etc/hostname
@@ -66,16 +66,6 @@
 - name: PermitRootLogin
   shell: echo "PermitRootLogin yes" | sudo tee -a /etc/ssh/sshd_config
   become: yes
-
-- name: Copy of hosts
-  copy:
-    src: hosts
-    dest: /etc/
-    mode: '0644'
-
-- name: Afficher la sortie du script
-  debug:
-    var: script_output.stdout
 
 - name: Reboot
   shell: reboot

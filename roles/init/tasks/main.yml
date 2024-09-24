@@ -1,10 +1,82 @@
 ---
-- name: Copie de init.sh
-  copy:
-    src: init.sh
-    dest: /root/
-    mode: '0755'
+- name: Exécuter le script shell
+  shell: |
+    echo "Le nom souhaité est : {{ hostname }}"
+    echo "L'IP souhaitée est : {{ ip_address }}"
+  environment:
+    HOSTNAME: "{{ hostname }}"
+    IP_ADDRESS: "{{ ip_address }}"
+  register: script_output
 
-- name: Execute init.sh
-  shell: /root/init.sh
+- name: Copy of resolv.conf
+  copy:
+    src: resolv.conf
+    dest: /etc/
+    mode: '0644'
+
+- name: Install apt gpg curl ifupdown sudo gpg
+  apt:
+    name:
+      - hostname
+      - ifupdown
+      - systemd
+      - sudo
+      - curl
+      - gpg
+    state: present
+    update_cache: yes
+
+- name: Copy of hosts
+  copy:
+    src: hosts
+    dest: /etc/
+    mode: '0644'
+
+- name: Changer le hostname dans /etc/hosts
+  lineinfile:
+    path: /etc/hosts
+    regexp: '^127\.0\.1\.1.*'
+    line: "127.0.1.1 {{ hostname }}"
+    state: present
+
+- name: Changer le hostname dans /etc/hostname
+  hostname:
+    name: "{{hostname}}"
+
+- name: Remplacer dhcp par static dans network/interfaces
+  lineinfile:
+    path: /etc/network/interfaces
+    regexp: '^\s*iface\s+\w+\s+inet\s+dhcp\s*$'
+    line: 'iface {{ ansible_default_ipv4.interface }} inet static'
+    state: present
+
+- name: Add static IP configuration
+  blockinfile:
+    path: /etc/network/interfaces
+    insertafter: 'iface {{ ansible_default_ipv4.interface }} inet static'
+    block: |
+      address {{ ip_address }}
+      netmask 255.255.255.0
+      gateway 192.168.14.1
+
+- name: Set hostname
+  shell: hostnamectl set-hostname "{{hostname}}"
+  become: yes
+
+- name: PermitRootLogin
+  shell: echo "PermitRootLogin yes" | sudo tee -a /etc/ssh/sshd_config
+  become: yes
+
+- name: Copy of hosts
+  copy:
+    src: hosts
+    dest: /etc/
+    mode: '0644'
+
+- name: Afficher la sortie du script
+  debug:
+    var: script_output.stdout
+
+- name: Reboot
+  shell: reboot
   become: yes

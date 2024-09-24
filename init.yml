@@ -1,6 +1,14 @@
 ---
-- hosts: localhost
-  connection: local
+- name: Exécuter un script shell avec des variables
+  hosts: localhost
+  vars_prompt:
+    - name: "hostname"
+      prompt: "Entrez le hostname "
+      private: no
+
+    - name: "ip_address"
+      prompt: "Entrez l'adresse ip "
+      private: no
 
   roles:
     - init

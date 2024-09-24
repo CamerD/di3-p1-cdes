@@ -1,0 +1,15 @@
+127.0.0.1 localhost
+127.0.1.1 temp
+
+192.168.14.180 master-01
+192.168.14.181 worker-01
+192.168.14.182 worker-02
+
+192.168.14.183 master-02
+192.168.14.184 worker-03
+192.168.14.185 worker-04
+
+# The following lines are desirable for IPv6 capable hosts
+::1     localhost ip6-localhost ip6-loopback
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters

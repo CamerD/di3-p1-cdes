@@ -1,78 +1,12 @@
 ---
-- name: Creation du repertoire de nextcloud et traefik
-  file:
-    path: /root/nxc
-    state: directory
+- name: Execute the script master-init.sh
+  script: worker-init.sh
 
-- name: Creation du repertoire nxc/config
-  file:
-    path: /root/nxc/config
-    state: directory
-
-- name: Creation du repertoire nxc/certs
-  file:
-    path: /root/nxc/certs
-    state: directory
-
-- name: Copie de static.yml
+- name: Copy the containerd configuration file
   copy:
-    src: static.yml
-    dest: /root/nxc/config
+    src: config.toml
+    dest: /etc/containerd/config.toml
+    mode: '0644'
 
-- name: Copie de dynamic.yml
-  copy:
-    src: dynamic.yml   
-    dest: /root/nxc/config
-
-- name: Copie de nextcloud.yml
-  copy: 
-    src: nextcloud.yml
-    dest: /root/nxc
-
-- name: Copie de traefik.yml
-  copy:
-    src: traefik.yml
-    dest: /root/nxc
-
-- name: Copie de nxc-stop.sh
-  copy:
-    src: nxc-stop.sh
-    dest: /root/nxc
-    mode: '0755'
-
-- name: Copie de nxc-debug.sh
-  copy:
-    src: nxc-debug.sh
-    dest: /root/nxc
-    mode: '0755'
-
-- name: Copie de nxc-start.sh
-  copy:
-    src: nxc-start.sh
-    dest: /root/nxc
-    mode: '0755'
-
-- name: Copie de nxc-prune.sh
-  copy:
-    src: nxc-prune.sh
-    dest: /root/nxc
-    mode: '0755'
-
-- name: Telechargement mkcert
-  get_url:
-    url: http://s-adm.gsb.adm/gsbstore/mkcert
-    dest: /usr/local/bin
-    mode: '0755'
-
-- name: Initialisation  mkcert
-  command: /usr/local/bin/mkcert -install
-  args:
-    chdir: /root/nxc
-
-- name: Creation certificats
-  command: /usr/local/bin/mkcert -cert-file certs/local-cert.pem -key-file certs/local-key.pem "s-nxc.gsb.lan" "*.gsb.lan"
-  args:
-    chdir: /root/nxc
-
-- name: Creation reseau docker proxy
-  command: docker network create proxy
+- name: Execute the script master-inst.sh
+  script: worker-install.sh

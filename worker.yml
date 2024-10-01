@@ -3,10 +3,4 @@
   connection: local
 
   roles:
-    - base
-    - docker
-    - nxc-traefik
-    - ssh-cli
-    - syslog-cli
-    - snmp-agent
-    - post
+    - worker

@@ -1,11 +1,11 @@
 # Guide d'utilisation des scripts
 Pour utiliser ces scripts, installez Ansible et Git.
 
-'apt install ansible git -y'
+`apt install ansible git -y`
 
 Clonez le repo sur la machine ciblée
 
-'git clone https://github.com/CamerD/di3-p1-cdes.git'
+`git clone https://github.com/CamerD/di3-p1-cdes.git`
 
 Allez dans di3-p1-cdes et sélectionnez le script souhaité.
 
@@ -21,4 +21,4 @@ master.yml permet l'installation et le paramétrage des noeuds master du cluster
 worker.yml permet l'installation et le paramétrage des noeuds worker du cluster k8s.
 
 Pour utiliser un des scripts yaml, utilisez la commande ansible-playbook à la racine du repo. Voici un exemple avec init.yml :
-'ansible-playbook init.yml'
+`ansible-playbook init.yml`

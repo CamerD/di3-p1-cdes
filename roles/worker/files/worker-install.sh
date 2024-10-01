@@ -19,4 +19,4 @@ sudo apt install kubelet kubeadm kubectl -y
 # Empêcher la mise à jour automatique de kubelet, kubeadm et kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 
-kubeadm join master-01:6443 --token nbrud1.46u01rsnmi989bgi --discovery-token-ca-cert-hash sha256:73d93720dd7092a5ac45e92c87616c61e312bcddf7c00aa9b9c9ada895e3f3ec --control-plane --certificate-key 3063b76ef8f19ea781aef62988272a45220ca8e65799cfdac4e9483aa721c7a0
+kubeadm join master-01:6443 --token nbrud1.46u01rsnmi989bgi --discovery-token-ca-cert-hash sha256:73d93720dd7092a5ac45e92c87616c61e312bcddf7c00aa9b9c9ada895e3f3ec

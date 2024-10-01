@@ -1,35 +1,25 @@
-# Installation de Nextcloud et du proxy inverse Traefik
+Pour générer un token afin de rejoindre le master : 
+`kubeadm token create --print-join-command`
 
-Nextcloud et Traefik fonctionnent grâce à docker. Pour pouvoir faire fonctionner ce playbook, docker doit être installé.
-
-## Premièrement 
-
-Le playbook va créer le dossier nxc à la racine de root. Deux fichier docker-compose "nextcloud.yml" et "traefik.yml" y seront copiés depuis le répertoire "files" du playbook.
-Enfin, dans le répertoire nxc, seront créé les dossier certs et config.
-
-### Deuxièmement
-
-Le playbook va copier les fichiers placés dans "files" et les placer dans les bons répertoires.
-
-#### Troisièmement
-
-Le playbook va créer un certificat x509 grâce à mkcert, il s'agit d'une solution permettant de créer 
-des certificats auto-signés. Pour cela il télécharge mkcert sur s-adm (utiliser le getall).
-
-mkcert sera placé dans : /usr/local/bin/ 
-
-Pour créer le certificat le playbook va executer des lignes de commandes (lancé depuis nxc/) :
+Résultat :
+```bash
+kubeadm join <master-node>:6443 --token <token> --discovery-token-ca-cert-hash <ca-cert-hash> 
+--control-plane --certificate-key 3063b76ef8f19ea781aef62988272a45220ca8e65799cfdac4e9483aa721c7a0
 ```
-/usr/local/bin/mkcert -install # Installe mkcert
-/usr/local/bin/mkcert -key-file key.pem -cert-file cert.pem "hôte.domaine.local" "*.domaine.local" #Crée le certificat le DNS spécifié
+
+Pour rejoindre un cluster kubernetes en tant que master, il faut ajouter les arguments : --control-plane --certificate-key <certificate-key>
+
+Pour trouver la clé du certificat : 
+`kubeadm init phase upload-certs --upload-certs`
+
+
+Commande finale :
+
+```bash
+kubeadm join <ip-address>:6443\
+    --token=<token> \
+    --discovery-token-ca-cert-hash sha256:<ca-cert-hash> \
+    --control-plane \
+    --certificate-key <certificate-key>
 ```
-##### Quatrièmement
 
-Le playbook va lancer les fichier "docker-compose" à savoir : nextcloud.yml et traefik.yml. 
-Cela va installer les solutions automatiquement. Nextcloud est alors fonctionnel avec
-un proxy inverse qui va rediriger en HTTPS.
-
-
-ATTENTION : Après avoir relancé la VM, executez le script "nxc-start.sh" afin d'installer les piles applicatives. 
-Une fois le script fini, accedez au site :
-https://s-nxc.gsb.lan

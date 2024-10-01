@@ -1,0 +1,18 @@
+persistence:
+  enabled: true
+  storageClass: longhorn
+
+service:
+  type: ClusterIP
+  port: 1433
+
+ingress:
+  enabled: true
+  hostname: mssql.example.com
+  path: /mssql
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  tls: []
+
+mssqlPassword: "YourStrongPassword"

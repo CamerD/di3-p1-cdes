@@ -1,0 +1,7 @@
+service:
+  enabled: true
+  type: LoadBalancer
+  externalIPs:
+    - 192.168.14.180
+    - 192.168.14.181
+    - 192.168.14.182

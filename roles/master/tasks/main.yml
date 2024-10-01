@@ -9,6 +9,4 @@
     mode: '0644'
 
 - name: Execute the script master-inst.sh
-  script: master-inst.sh
-
-
+  script: master-install.sh

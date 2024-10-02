@@ -23,6 +23,7 @@
       - sudo
       - curl
       - gpg
+      - open-iscsi
     state: present
     update_cache: yes
 

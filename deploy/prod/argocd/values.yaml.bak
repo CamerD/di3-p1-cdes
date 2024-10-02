@@ -1,0 +1,12 @@
+config:
+  params:
+    server.insecure: true
+
+server:
+  ingress:
+    enabled: true
+    ingressClassName: traefik
+    hostname: "digitaljukeboxg6bis.reseau-labo.fr"
+    path: /
+    pathType: Prefix
+    tls: false

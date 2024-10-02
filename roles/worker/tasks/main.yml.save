@@ -1,5 +1,5 @@
 ---
-- name: Execute the script worker-init.sh
+- name: Execute the script master-init.sh
   script: worker-init.sh
 
 - name: Copy the containerd configuration file
@@ -8,5 +8,5 @@
     dest: /etc/containerd/config.toml
     mode: '0644'
 
-- name: Execute the script worker-install.sh
+- name: Execute the script master-inst.sh
   script: worker-install.sh

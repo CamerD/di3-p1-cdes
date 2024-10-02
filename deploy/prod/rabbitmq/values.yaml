@@ -1,6 +1,6 @@
 auth:
-  username: master
-  password: AuthSecret2024
+  username: admin
+  password: changeme
   erlangCookie: ee21b4c272ecc8e6bf70caedf0445803  # Nécessaire pour les clusters RabbitMQ
 
 replicaCount: 1  # Ajustez si vous voulez plusieurs répliques
@@ -25,3 +25,9 @@ resources:
     memory: 512Mi
     cpu: 200m
 
+ingress:
+  enabled: true
+  path: /  # Définit le chemin pour l'accès à RabbitMQ
+  hostname: digitaljukeboxg6bis.reseau-labo.fr  # Définissez votre domaine ici
+  ingressClassName: traefik  # Nom de la classe d'Ingress utilisée
+  tls: false  # TLS désactivé, si vous voulez utiliser HTTPS, changez cela à 'true'

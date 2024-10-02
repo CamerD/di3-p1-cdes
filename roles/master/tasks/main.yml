@@ -8,5 +8,5 @@
     dest: /etc/containerd/config.toml
     mode: '0644'
 
-- name: Execute the script master-inst.sh
+- name: Execute the script master-install.sh
   script: master-install.sh

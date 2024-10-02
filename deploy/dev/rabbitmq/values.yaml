@@ -1,0 +1,33 @@
+auth:
+  username: admin
+  password: changeme
+  erlangCookie: ee21b4c272ecc8e6bf70caedf0445803  # Nécessaire pour les clusters RabbitMQ
+
+replicaCount: 1  # Ajustez si vous voulez plusieurs répliques
+
+persistence:
+  enabled: true
+  storageClass: "longhorn"
+  accessModes:
+    - ReadWriteOnce
+  size: 8Gi  # Taille du volume persistant
+
+service:
+  type: ClusterIP  # Utilisez LoadBalancer si vous avez besoin d'un accès externe
+  port: 5672  # Port de service RabbitMQ
+  nodePort: 32092  # Port pour les nœuds
+
+resources:
+  requests:
+    memory: 256Mi
+    cpu: 100m
+  limits:
+    memory: 512Mi
+    cpu: 200m
+
+ingress:
+  enabled: true
+  path: /  # Définit le chemin pour l'accès à RabbitMQ
+  hostname: digitaljukeboxg6.reseau-labo.fr
+  ingressClassName: traefik  # Nom de la classe d'Ingress utilisée
+  tls: false  # TLS désactivé, si vous voulez utiliser HTTPS, changez cela à 'true'

@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd-server-ingress
+  namespace: argocd
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web  # Utilise l'entrypoint 'web' pour HTTP
+spec:
+  rules:
+  - host: digitaljukeboxg6bis.reseau-labo.fr
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: argocd-server
+            port:
+              number: 80
+  - host: digitaljukeboxg6.reseau-labo.fr
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: argocd-server
+            port:
+              number: 80
+
